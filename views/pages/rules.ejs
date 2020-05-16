@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body style="background-color:#F1EEE3;">
+
+<div class="jumbotron text-center" style="background-color:#222244;">
+  <div class="container">
+    <a href="/" class="lang-logo">
+      <img src="/house-logo.png">
+    </a>
+    <h1>#the-town</h1>
+    <p>The office lynching game for Slack.</p>
+    <a href="/maps"><strong>Click Here For Map List</strong></a>
+  </div>
+</div>
+
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-4"><h3 style="font-family: jubilat,serif; font-weight: bold;">Townfolk Roles</h3></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3"><h3 style="font-family: jubilat,serif; font-weight: bold;">Monster Roles</h3></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2"><h3 style="font-family: jubilat,serif; font-weight: bold;">Neutral Roles</h3></div>
+  </div>
+  <div class="row" style="padding-top:20px;">
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#villagerModal">
+      <p class="text-center" style="font-size: x-small;">VILLAGER</p>
+      <a class="lang-logo">
+        <img src="/icons/villager.png" class="roleimg">
+      </a>
+    </div>
+    <div id="villagerModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">VILLAGER</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Villager is the most common role in the game. It has no special abilities or unique attributes. Notably the Mantis believes themself to be a Villager.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#seerModal">
+      <p class="text-center" style="font-size: x-small;">SEER</p>
+      <a class="lang-logo">
+        <img src="/icons/seer.png" class="roleimg">
+      </a>
+    </div>
+    <div id="seerModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">SEER</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Seer is a powerful role that can reveal information about other players, but this power makes them a target for the monsters. Notably the Fool believes themself to be the Seer.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townability @target</code> - Learn the role of a player, once per day.</p>
+            <p>(Shade/Jester roles will appear as Villager when scanned.)</p>
+            <p><code>/townscans</code> - Review previous reveal information.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+            <p>Scan 1 non-Shade monster. (Applies only if the town wins.)</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#foolModal">
+      <p class="text-center" style="font-size: x-small;">FOOL</p>
+      <a class="lang-logo">
+        <img src="/icons/fool.png" class="roleimg">
+      </a>
+    </div>
+    <div id="foolModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">FOOL</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Fool believes themself to be the Seer and exists primarily to make the real Seer doubt their abilities. Usually the truth can be distinguished after a day or two, but will it be soon enough?</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townability @target</code> - Incorrectly learn the role of a player, once per day.</p>
+            <p>(The Seer will always appear as Fool when scanned.)</p>
+            <p><code>/townscans</code> - Review previous reveal information.</p>
+            <p><code>PASSIVE</code> - You believe you are the Seer.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+            <p>Scan the Seer. (Applies only if the town wins.)</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#beholderModal">
+      <p class="text-center" style="font-size: x-small;">BEHOLDER</p>
+      <a class="lang-logo">
+        <img src="/icons/beholder.png" class="roleimg">
+      </a>
+    </div>
+    <div id="beholderModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">BEHOLDER</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Beholder is a utility role, that gains information as time passes. They eventually learn the identity of the Shade, so the monsters will often try to dispose of them before that happens.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townscans</code> - Review previous reveal information.</p>
+            <p><code>PASSIVE</code> - You receive a message when scanned by another player.</p>
+            <p><code>PASSIVE</code> - You sense new things each day:</p>
+            <ul class="center-justified">
+              <li>Day 1 - You learn the identity of a Seer or Fool.</li>
+              <li>Day 2 - You learn the identity of the Seer and Fool, but not which is which.</li>
+              <li>Day 3 - You learn the exact identity of the Seer and Fool.</li>
+              <li>Day 4 - You learn the identity of the Shade.</li>
+            </ul>
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+            <p>Survive until day 3. (Applies only if the town wins.)</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#impModal">
+      <p class="text-center" style="font-size: x-small;">IMP</p>
+      <a class="lang-logo">
+        <img src="/icons/imp.png" class="roleimg">
+      </a>
+    </div>
+    <div id="impModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">IMP</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Imp is the most basic monster role, with no special attributes. Notably the Cursed player may change into an Imp when the monsters attempt to eat them.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#ghoulModal">
+      <p class="text-center" style="font-size: x-small;">GHOUL</p>
+      <a class="lang-logo">
+        <img src="/icons/ghoul.png" class="roleimg">
+      </a>
+    </div>
+    <div id="ghoulModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">GHOUL</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Ghoul is a basic monster role, with the added benefit of identifying people the monsters have eaten. The monsters were originally called 'Ghouls' and the term still sees some use.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+            <p><code>PASSIVE</code> - You can see the identiy of any <i>eaten</i> target. This ability is lost on death.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#lichModal">
+      <p class="text-center" style="font-size: x-small;">LICH</p>
+      <a class="lang-logo">
+        <img src="/icons/lich.png" class="roleimg">
+      </a>
+    </div>
+    <div id="lichModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">LICH</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Lich is the sinister and powerful leader of the monsters, with the ability to identify other players. Notably the Zombie is immune to most causes of death while the Lich is alive.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+            <p><code>/townability @target</code> - Learn the role of a player, once per day.</p>
+            <p>(Shade/Jester roles will appear as Villager when scanned.)</p>
+            <p><code>/townscans</code> - Review previous reveal information.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#assassinModal">
+      <p class="text-center" style="font-size: x-small;">ASSASSIN</p>
+      <a class="lang-logo">
+        <img src="/icons/assassin.png" class="roleimg">
+      </a>
+    </div>
+    <div id="assassinModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">ASSASSIN</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Assassin has a list of three targets and has the sole purpose of ensuring their demise through any means possible, no matter who they might be.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p>You will always have at least one monster, and one townfolk on your list. The Cursed will never be a target.</p>
+            <p><code>/townability @target</code> - Instantly <i>assassinate</i> a player.</p>
+            <p>This ability is gained at the beginning of day 2, and day 4, and cannot be used if all three of your targets have been slain. This may trigger certain on-death effects. A message will play indicating each time you gain access to this ability.</p>
+            <p><code>PASSIVE</code> - You can see the role of any <i>assassinated</i> player.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>All 3 targets are slain while you are still alive.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#jesterModal">
+      <p class="text-center" style="font-size: x-small;">JESTER</p>
+      <a class="lang-logo">
+        <img src="/icons/jester.png" class="roleimg">
+      </a>
+    </div>
+    <div id="jesterModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">JESTER</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>Unlike most roles, the Jester has the goal of trying to die before the game ends. Neither the townfolk nor the monsters have any incentive to kill the Jester, meaning it requires some luck or clever trickery.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - When scanned by other players, you appear as a Villager.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Die by any means other than <i>infection</i> or being <i>eaten</i>.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top:20px;">
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#apprenticeModal">
+      <p class="text-center" style="font-size: x-small;">APPRENTICE</p>
+      <a class="lang-logo">
+        <img src="/icons/apprentice.png" class="roleimg">
+      </a>
+    </div>
+    <div id="apprenticeModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">APPRENTICE</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Apprentice starts out ordinary, but is a very important role. When the Seer is slain, the Apprentice becomes a Seer, allowing them to act as a useful backup if the monsters gain the upperhand.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - When the Seer or Fool is slain, your role changes to Seer or Fool respectively. Priority is given to Seer in the event they both die in the same instance.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#hunterModal">
+      <p class="text-center" style="font-size: x-small;">HUNTER</p>
+      <a class="lang-logo">
+        <img src="/icons/hunter.png" class="roleimg">
+      </a>
+    </div>
+    <div id="hunterModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">HUNTER</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Hunter can be a dangerous role for the monsters, but also for the town. When slain by most methods, the Hunter shoots and kills a player of their choice. The hard part is choosing correctly.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townability @target</code> - Mark another player for death. Can be swapped at will. When slain by being <i>lynched</i>, <i>eaten</i>, <i>assassinated</i>, <i>impaled</i> or <i>scuffled</i> you fire an arrow at the target killing them.</p>
+            <p><code>PASSIVE</code> - You can see the role of any <i>shot</i> player.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+            <p>Shoot and kill a monster. (Applies only if the town wins.)</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#paladinModal">
+      <p class="text-center" style="font-size: x-small;">PALADIN</p>
+      <a class="lang-logo">
+        <img src="/icons/paladin.png" class="roleimg">
+      </a>
+    </div>
+    <div id="paladinModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">PALADIN</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Paladin is the bane of the monsters. They can protect other players from the monsters, or can retaliate against the monsters when they are slain.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townability @target</code> - Bless a target. Can be swapped at will. Cannot bless self. Blessed players are protected from being <i>eaten</i> by the monsters. If a monster is blessed, and the Paladin is <i>eaten</i>, then the monster will be <i>purged</i>. After a blessing is activated or the Paladin dies, this ability is disabled and all blessings are removed. The Archdemon can be <i>purged</i> but will not be slain by it.</p>
+            <p><code>PASSIVE</code> - You are blessed on day 1.</p>
+            <p><code>PASSIVE</code> - You can see the role of any <i>purged</i> player.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+            <p>A blessing is activated on any player. (Applies only if the town wins.)</p>
+            <p>Purge a monster. (Applies only if the town wins.)</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#cryptkeeperModal">
+      <p class="text-center" style="font-size: x-small;">CRYPTKEEPER</p>
+      <a class="lang-logo">
+        <img src="/icons/cryptkeeper.png" class="roleimg">
+      </a>
+    </div>
+    <div id="cryptkeeperModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">CRYPTKEEPER</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Cryptkeeper can reveal crucial information to the town, but only about dead players. This can make them very valuable the more time passes, provided they survive themselves.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - You can see the role of any dead player.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+            <p>Outlive 4 players. (Applies only if the town wins.)</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#shadeModal">
+      <p class="text-center" style="font-size: x-small;">SHADE</p>
+      <a class="lang-logo">
+        <img src="/icons/shade.png" class="roleimg">
+      </a>
+    </div>
+    <div id="shadeModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">SHADE</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Shade is a particularly sly monster, whose immunity to being scanned can allow them to escape the wrath of the townfolk unnoticed in tough situations.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+            <p><code>PASSIVE</code> - When scanned by other players, you appear as a Villager.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#hellionModal">
+      <p class="text-center" style="font-size: x-small;">HELLION</p>
+      <a class="lang-logo">
+        <img src="/icons/hellion.png" class="roleimg">
+      </a>
+    </div>
+    <div id="hellionModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">HELLION</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Hellion is a lethal monster, who can incinerate someone on the spot. Notably the Cursed player may change into a Hellion when the monsters attempt to eat them.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+            <p><code>/townability @target</code> - Instantly <i>incinerate</i> a player. This becomes available on day 2, and can only be used once.</p>
+            <p><code>PASSIVE</code> - You can see the role of any <i>incinerated</i> player.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#zombieModal">
+      <p class="text-center" style="font-size: x-small;">ZOMBIE</p>
+      <a class="lang-logo">
+        <img src="/icons/zombie.png" class="roleimg">
+      </a>
+    </div>
+    <div id="zombieModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">ZOMBIE</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Zombie is deceptionally durable monster who is immune to most forms of death until the accompanying Lich is slain.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+            <p><code>PASSIVE</code> - You are immune to all forms of death except being <i>purged</i> or <i>detonated</i>. Any failed attempt to kill you reveals your role. This ability is lost when the Lich is slain.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#techieModal">
+      <p class="text-center" style="font-size: x-small;">TECHIE</p>
+      <a class="lang-logo">
+        <img src="/icons/techie.png" class="roleimg">
+      </a>
+    </div>
+    <div id="techieModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">TECHIE</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Techie is an explosive addition to any game, who detonates two other players when slain. The Techie inevitably becomes a last ditch target for a losing team of monsters, but fortunately they only need to survive the short term to win.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - When slain you <i>detonate</i> two random players.</p>
+            <p><code>PASSIVE</code> - You can see the role of any <i>detonated</i> player.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Survive until day 3.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#mantisModal">
+      <p class="text-center" style="font-size: x-small;">MANTIS</p>
+      <a class="lang-logo">
+        <img src="/icons/mantis.png" class="roleimg">
+      </a>
+    </div>
+    <div id="mantisModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">MANTIS</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Mantis is under the delusion they are just a regular Villager, but their insect form makes them a powerful opponent when threatened.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - When <i>lynched</i> you randomly <i>scuffle</i> someone who voted for you.</p>
+            <p><code>PASSIVE</code> - When <i>eaten</i> you <i>scuffle</i> a random monster.</p>
+            <p><code>PASSIVE</code> - When <i>assassinated</i> you <i>scuffle</i> the Assassin.</p>
+            <p><code>PASSIVE</code> - When <i>incinerated</i> you <i>scuffle</i> the Hellion.</p>
+            <p><code>PASSIVE</code> - When dying of <i>infection</i> you <i>scuffle</i> the Hazmat.</p>
+            <p><code>PASSIVE</code> - You believe you are a Villager.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Survive the game.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top:20px;">
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#mayorModal">
+      <p class="text-center" style="font-size: x-small;">MAYOR</p>
+      <a class="lang-logo">
+        <img src="/icons/mayor.png" class="roleimg">
+      </a>
+    </div>
+    <div id="mayorModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">MAYOR</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>Everyone knows who the Mayor is and a result of their public office is having an extra vote on who gets lynched. A clever Mayor is a nuisance for the monsters, but an unattentive one can be easy to manipulate.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member. Your vote counts as two.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - Everyone knows you are the Mayor.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>The monsters are defeated.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#masonModal">
+      <p class="text-center" style="font-size: x-small;">MASON</p>
+      <a class="lang-logo">
+        <img src="/icons/mason.png" class="roleimg">
+      </a>
+    </div>
+    <div id="masonModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">MASON</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Mason is a secretive role, that always comes in groups. Each Mason knows who the others are, which can give them an advantage when deducing who might be a monster.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - You know the identity of all Mason players.</p>
+            <p><code>PASSIVE</code> - If any Mason is an Assassin target, you know about it.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+            <p>At least one Mason survived. (Applies only if the town wins.)</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#cursedModal">
+      <p class="text-center" style="font-size: x-small;">CURSED</p>
+      <a class="lang-logo">
+        <img src="/icons/cursed.png" class="roleimg">
+      </a>
+    </div>
+    <div id="cursedModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">CURSED</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Cursed starts out on the side of the townfolk, but turns into a monster when eaten. If they manage to survive unchanged until day 4, their misfortune changes into a blessing of immortality. Notably the Cursed is never an Assassin target.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - Your curse weakens each day:</p>
+            <ul class="center-justified">
+              <li>Day 1 - When eaten, you become a Hellion.</li>
+              <li>Day 2 - When eaten, you become a Hellion.</li>
+              <li>Day 3 - When eaten, you become an Imp.</li>
+              <li>Day 4 - You immediately change into the Celestial.</li>
+            </ul>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#executionerModal">
+      <p class="text-center" style="font-size: x-small;">EXECUTIONER</p>
+      <a class="lang-logo">
+        <img src="/icons/executioner.png" class="roleimg">
+      </a>
+    </div>
+    <div id="executionerModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">EXECUTIONER</h4>
+          </div>
+          <div class="modal-body">
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Executioner operates the gallows, and is essentially immune to being lynched, but being able to redirect who is lynched can be dangerous if not careful.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - If the town attempts to lynch you, the person you voted for is lynched instead. This ability reveals you when activated, and can be used indefinitely.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Be alive when all the monsters are slain.</p>
+            <p>Outlive 1 monster. (Applies only if the town wins.)</p>
+          </div></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#spectreModal">
+      <p class="text-center" style="font-size: x-small;">SPECTRE</p>
+      <a class="lang-logo">
+        <img src="/icons/spectre.png" class="roleimg">
+      </a>
+    </div>
+    <div id="spectreModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">SPECTRE</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Spectre is an extremely dangerous monster, who threatens the town even after being slain for the first time, by possessing an innocent Villager.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+            <p><code>PASSIVE</code> - When slain for the first time, if possible a random living Villager is changed into a new Spectre. This does not apply when <i>purged</i>.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#archdemonModal">
+      <p class="text-center" style="font-size: x-small;">ARCHDEMON</p>
+      <a class="lang-logo">
+        <img src="/icons/archdemon.png" class="roleimg">
+      </a>
+    </div>
+    <div id="archdemonModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">ARCHDEMON</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Archdemon is a demon of such infernal strength that it cannot be killed by ordinary means. Its only weakness
+              is the host to which it binds its soul.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+            <p><code>/townability @target</code> - Bind yourself to a non-monster. <b>Can only be done once</b>.</p>
+            <p><code>PASSIVE</code> - If you do not bind yourself to someone on the first day, you are <i>banished</i>.</p>
+            <p><code>PASSIVE</code> - You know the role of the person you bind to.</p>
+            <p><code>PASSIVE</code> - You will be <i>banished</i> if the bound player dies, but you are immune to all other causes of death.</p>
+            <p><code>PASSIVE</code> - Failed attempts on your life reveal your role, but lynching you also reveals three potential bound players.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#bonewheelskeletonModal">
+      <p class="text-center" style="font-size: x-small;">BONEWHEEL</p>
+      <a class="lang-logo">
+        <img src="/icons/bonewheelskeleton.gif" class="roleimg">
+      </a>
+    </div>
+    <div id="bonewheelskeletonModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">BONEWHEEL</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Bonewheel inflicts carnage of insane proportions at the cost of its own life. Lining up the perfect roll is critical its success. No one is safe!</p>
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>/townfeast @target</code> - Vote to eat a town member.</p>
+            <p><code>/townmonsters</code> - Learn who your fellow monsters are.</p>
+            <p><code>/townability @target</code> - Begin rolling at the target, <i>impaling</i> them, the person they voted for, the person who that person voted for and so on, until a dead end or yourself is reached. At the end of the roll, the Bonewheel <i>crashes</i> and post death effects are triggered in order. This becomes available on day 2, and can only be used once.</p>
+            <p><code>PASSIVE</code> - You are immune to all causes of death except <i>lynching</i>, <i>purging</i> and <i>crashing</i>.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Monsters match or outnumber non-monsters.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#duelistModal">
+      <p class="text-center" style="font-size: x-small;">DUELIST</p>
+      <a class="lang-logo">
+        <img src="/icons/duelist.png" class="roleimg">
+      </a>
+    </div>
+    <div id="duelistModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">DUELIST</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Duelist cares not for the politics of the town. They have a score to settle and that's all that matters.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - Every non-Duelist vote you receive each night decreases Moxie by 1.</p>
+            <p><code>PASSIVE</code> - If your Moxie reaches 0 you die of SHAME, unless you're the last Duelist.</p>
+            <p><code>PASSIVE</code> - You know the identity of all other Duelist players.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>You are the last Duelist standing.</p>
+            <p>Have the highest Moxie of all living Duelists when the game ends.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#hazmatModal">
+      <p class="text-center" style="font-size: x-small;">HAZMAT</p>
+      <a class="lang-logo">
+        <img src="/icons/hazmat.png" class="roleimg">
+      </a>
+    </div>
+    <div id="hazmatModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+            <h4 class="modal-title" style="font-family: jubilat,serif;">HAZMAT</h4>
+          </div>
+          <div class="modal-body">
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+            <p>The Hazmat spreads an infectious plague that kills monster and townfolk alike, but the volatile nature of its spread can make it difficult to control, and often backfire in the face of its bearer.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+            <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+            <p><code>/towninfo</code> - Display what information you have.</p>
+            <p><code>PASSIVE</code> - You start each day Infected. Any command used on an Infected player, transfers it to the user or randomly to someone else.</p>
+            <p><code>PASSIVE</code> - After lynching has occurred, if the Infected player is still standing they die of <i>Infection</i>.</p>
+            <p><code>PASSIVE</code> - You are immune to death by <i>Infection</i> once. A public message will indicate when this happens.</p>
+            <p><code>PASSIVE</code> - You can see who is currently Infected, and the role of any player who has died of <i>Infection</i>.</p>
+            <p><code>PASSIVE</code> - The Infected status is removed immediately from all players when you die.</p>
+
+            <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+            <p>Two other players have died of Infection.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-top:20px;">
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#courierModal">
+      <p class="text-center" style="font-size: x-small;">COURIER</p>
+      <a class="lang-logo">
+        <img src="/icons/courier.png" class="roleimg">
+      </a>
+    </div>
+    <div id="courierModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+              <h4 class="modal-title" style="font-family: jubilat,serif;">COURIER</h4>
+            </div>
+            <div class="modal-body">
+              <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+              <p>The Courier can deliver mail to other players, secretly revealing their identity to them. But they must be careful not to deliver any to the monsters, for risk of exposing themself.</p>
+
+              <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+              <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+              <p><code>/towninfo</code> - Display what information you have.</p>
+              <p><code>/townability @target</code> - Privately expose your role to someone, once per day. Anyone who has received mail, knows your identity, and also knows if anyone else has received mail.</p>
+
+              <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+              <p>Be alive when all the monsters are slain.</p>
+              <p>Deliver mail to two non-monsters. (Applies only if the town wins.)</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-1 roleblock" data-toggle="modal" data-target="#celestialModal">
+      <p class="text-center" style="font-size: x-small;">CELESTIAL</p>
+      <a class="lang-logo">
+        <img src="/icons/celestial.png" class="roleimg">
+      </a>
+    </div>
+    <div id="celestialModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+              <h4 class="modal-title" style="font-family: jubilat,serif;">CELESTIAL</h4>
+            </div>
+            <div class="modal-body">
+              <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+              <p>The Celestial is a rare role that does not exist at the start of any game, but is instead the final reward for a Cursed player who survives unchanged until day 4.</p>
+
+              <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+              <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+              <p><code>/towninfo</code> - Display what information you have.</p>
+              <p><code>PASSIVE</code> - You are immune to all causes of death. Any attempt to kill you reveals your role.</p>
+
+              <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+              <p>The monsters are defeated.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-1 roleblock" data-toggle="modal" data-target="#drunkModal">
+        <p class="text-center" style="font-size: x-small;">DRUNK</p>
+        <a class="lang-logo">
+          <img src="/icons/drunk.png" class="roleimg">
+        </a>
+      </div>
+      <div id="drunkModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                <h4 class="modal-title" style="font-family: jubilat,serif;">DRUNK</h4>
+              </div>
+              <div class="modal-body">
+                <h5 style="font-family: jubilat,serif; font-weight: bold">Summary</h5>
+                <p>Given their tendency to brawl, nobody wants to go after the Drunk, however they are unscannable and can barely say a word, making it hard for them to prove they are someone worth avoiding.</p>
+
+                <h5 style="font-family: jubilat,serif; font-weight: bold">Main Commands</h5>
+              <p><code>/townlynch @target</code> - Vote to lynch a town member.</p>
+              <p><code>/towninfo</code> - Display what information you have.</p>
+              <p><code>PASSIVE</code> - Typing anything other than commands, white space and emojis causes you to <i>pass out</i>.</p>
+              <p><code>PASSIVE</code> - When <i>lynched</i> you randomly <i>scuffle</i> someone who voted for you.</p>
+              <p><code>PASSIVE</code> - When <i>eaten</i> you <i>scuffle</i> a random monster.</p>
+              <p><code>PASSIVE</code> - When <i>assassinated</i> you <i>scuffle</i> the Assassin.</p>
+              <p><code>PASSIVE</code> - When <i>incinerated</i> you <i>scuffle</i> the Hellion.</p>
+              <p><code>PASSIVE</code> - When dying of <i>infection</i> you <i>scuffle</i> the Hazmat.</p>
+              <p><code>PASSIVE</code> - When scanned you appear to be a Villager.</p>
+
+                <h5 style="font-family: jubilat,serif; font-weight: bold">Winning Objective(s)</h5>
+                <p>Survive the game.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+<div class="container" style="background-color:#F1EEE3 !important;">
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 style="font-family: jubilat,serif; font-weight: bold;"><span class="glyphicon glyphicon-info-sign"></span>How To Play</h3>
+      <h4>Join the channel #the-town</h4>
+      <ul>
+        <li>Use <code>/townsignup</code> to join the game.</li>
+        <li>Use <code>/townrole</code> to determine what do once the game starts.</li>
+        <li>Use <code>/towninfo</code> to view everything you currently know.</li>
+      </ul>
+
+      <h4>How the Game Works</h4>
+      <ul>
+        <li>Once the game begins, players are randomly assigned a <b>role</b>.</li>
+        <li><b>Townfolk roles</b> try to kill all the monsters in the town.</li>
+        <li><b>Monster roles</b> try to kill as many other players as possible.</li>
+        <li><b>Neutral roles</b> count as Townfolk, but generally have their own private objectives.</li>
+        <li>Every weekday, players publicly vote on who should be <b>lynched</b>. At 5PM MST, all the votes are tallied.
+          The player with the most votes is slain, and their role is revealed.</li>
+        <li>In private, the monsters vote on who should be <b>eaten</b>. After the lynching occurs, the monsters
+          eat the chosen individual.</li>
+        <li>The game ends when all monsters are slain, or the monsters equal/outnumber all non-monsters.</li>
+      </ul>
+
+      <h4>Etiquette Rules</h4>
+      <ul>
+        <li>All chat related to the game should <u>stay in the channel</u>, with the exception of monsters, and masons who are encouraged to collaborate in private respectively.</li>
+        <li>When you die, do not reveal anything or speak in the channel. The dead are eliminated from the game, but may observe in silence.</li>
+        <li>While you may accuse people of things, it is generally discouraged to directly ask for someones role or directly state your own right when the game begins.</li>
+        <li>Have fun!</li>
+      </ul>
+
+    </div>
+
+    <div class="col-md-6">
+      <h3 class="text-center" style="font-family: jubilat,serif; font-weight: bold;">Current Game</h3>
+      <div class="text-center">
+        <h5 id="gameHead" class="text-center" style="font-family: jubilat,serif;">No game currently running.</h5>
+        <ul id="gameData" class="text-center"></ul>
+      </div>
+    </div>
+  </div>
+  <br></br>
+   <div class="alert alert-info text-center" role="alert">
+   Thanks for reading.
+  </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+           url: "/gamedata"
+        })
+        .done(function( data ) {
+           console.log( "Sample of data:", data );
+           dataString = data.message;
+           if (dataString != "") {
+             dataList = dataString.split("##");
+             gameHeader = "";
+             for (var i = 0; i < dataList.length; ++i) {
+                if (i == 0) {
+                  gameHeader += dataList[i];
+                } else if (i == 1) {
+                  gameHeader += " - Day " + dataList[i];
+                  $("#gameHead").text(gameHeader);
+                } else {
+                  $("#gameData").append('<li class="center-justified gameList">'+dataList[i]+'</li>');
+                }
+             }
+           }
+        });
+    });
+</script>
+
+</body>
+</html>

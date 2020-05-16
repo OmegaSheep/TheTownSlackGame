@@ -1,0 +1,7 @@
+{
+  "name": "lynch-game",
+  "description": "Manages a Lynch Game.",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "heroku","lynch"],
+  "image": "heroku/nodejs"
+}
