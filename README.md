@@ -16,9 +16,9 @@ There are several parts to this process because I built this app gradually. This
 
 I recommend calling it "The Narrator".
 
-### 2. Gather the variables in the .ENV.SAMPLE file. 
+### 2. Gather environment variables.
 
-You'll need to set these on Heroku accordingly, and you can use your own .ENV to run things locally for test purposes.
+You'll eventually need to set these on Heroku accordingly, and you can use your own .ENV to run things locally for test purposes.
 
 * ADMIN_LIST - Admin users seperated by Hyphen.
 
