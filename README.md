@@ -37,7 +37,8 @@ You'll eventually need to set these on Heroku accordingly, and you can use your 
 * CLIENT_SECRET - Slack App Client Secret.
 
 * MONGOLAB_URI - I use Mlab.com for MongoDB hosting. You can make a free storage sandbox here and use the provided URI it generates.
-OAUTH - Slack App OAUTH URL.
+
+* OAUTH - Slack App OAUTH URL.
 
 ### 3. Deploy the app to heroku.
 
