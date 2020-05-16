@@ -12,98 +12,108 @@ Built with Node.js/Heroku.
 
 There are several parts to this process because I built this app gradually. This was made before Events API became a thing, so nowadays you must construct it as a "Classic Slack App" so that it uses the RTM ecosystem.
 
-1. Build a Classic Slack App. I recommend calling it "The Narrator".
+### 1. Build a Classic Slack App. 
 
-2. Gather the variables in the .ENV.SAMPLE file, you'll need to set these on Heroku accordingly, and you can use your own .ENV to run things locally for test purposes.
+I recommend calling it "The Narrator".
 
-ADMIN_LIST - Admin users seperated by Hyphen.
+### 2. Gather the variables in the .ENV.SAMPLE file. 
 
-ANNOUNCEHOOK - Webhook URL to the Slack channel where the game is played. Used for announcements sometimes.
+You'll need to set these on Heroku accordingly, and you can use your own .ENV to run things locally for test purposes.
 
-BOT_ID - Slack Bot User ID. Add the Bot User to the game channel and bug channel.
+* ADMIN_LIST - Admin users seperated by Hyphen.
 
-BOT_Token - Slack Bot User Token. Add the Bot User to the game channel and bug channel.
+* ANNOUNCEHOOK - Webhook URL to the Slack channel where the game is played. Used for announcements sometimes.
 
-BUGHOOK - Webhook URL to the Slack channel where users can anonymously post bugs for the Admin(s) to see.
+* BOT_ID - Slack Bot User ID. Add the Bot User to the game channel and bug channel.
 
-CHANNEL_ID - The Slack Channel ID of the Channel where the game is played.
+* BOT_Token - Slack Bot User Token. Add the Bot User to the game channel and bug channel.
 
-CLIENT_ID - Slack App Client ID.
+* BUGHOOK - Webhook URL to the Slack channel where users can anonymously post bugs for the Admin(s) to see.
 
-CLIENT_SECRET - Slack App Client Secret.
+* CHANNEL_ID - The Slack Channel ID of the Channel where the game is played.
 
-MONGOLAB_URI - I use Mlab.com for MongoDB hosting. You can make a free storage sandbox here and use the provided URI it generates.
+* CLIENT_ID - Slack App Client ID.
+
+* CLIENT_SECRET - Slack App Client Secret.
+
+* MONGOLAB_URI - I use Mlab.com for MongoDB hosting. You can make a free storage sandbox here and use the provided URI it generates.
 OAUTH - Slack App OAUTH URL.
 
-3. Deploy the app to heroku.
+### 3. Deploy the app to heroku.
 
-4. Configure the necessary Slash Commands as shown below. These are POST endpoints which the app exposes that are meant to be accessed via the Slash Command. There are 26. Slack Apps have a limit of 25 Slash commands, but several of the commands are for simulating a game while alone, and not necessary for normal gameplay so they can be excluded.
+### 4. Configure the necessary Slash Commands as shown below. 
 
-To avoid confusing with other apps on your Slack, I recommend prefixing these with "town" on Slack itself. eg. /townstats should be the command for calling the /stats endpoint.
+These are POST endpoints which the app exposes that are meant to be accessed via the Slash Command. There are 26. Slack Apps have a limit of 25 Slash commands, but several of the commands are for simulating a game while alone, and not necessary for normal gameplay so they can be excluded.
 
-### All Players: 
+To avoid confusing with other apps on your Slack, I recommend prefixing these with "town" on Slack itself. 
 
-/signup - Join the game.
+eg. /townstats should be the command for calling the /stats endpoint.
 
-/commands - Sends the player a list of all relevant commands.
+#### All Players: 
 
-/auto - Toggle auto-signup on and off.
+* /signup - Join the game.
 
-/veto # - Cast a private veto vote for the corresponding map #.
+* /commands - Sends the player a list of all relevant commands.
 
-/vetoinfo - See the current veto votes.
+* /auto - Toggle auto-signup on and off.
 
-/info - Entire dump of everything you know so far.
+* /veto # - Cast a private veto vote for the corresponding map #.
 
-/mapinfo - Learn what roles are on the current map.
+* /vetoinfo - See the current veto votes.
 
-/role - Learn what role you have been assigned. Add a role name as an argument, to learn about that role.
+* /info - Entire dump of everything you know so far.
 
-/lynch @victim - Publicly vote to lynch @victim. You may abstain by not specifying a victim.
+* /mapinfo - Learn what roles are on the current map.
 
-/ability @person - If you have an ability, use it on @person.
+* /role - Learn what role you have been assigned. Add a role name as an argument, to learn about that role.
 
-/votes - See the list of current lynch votes.
+* /lynch @victim - Publicly vote to lynch @victim. You may abstain by not specifying a victim.
 
-/stats @person - See the stats of @person. (Leave blank for your own stats.)
+* /ability @person - If you have an ability, use it on @person.
 
-/history # - Learn what happened in Season #.
+* /votes - See the list of current lynch votes.
 
-/leaderboard - See who tops the charts. Add the word "role" as an argument to see win % by role.
+* /stats @person - See the stats of @person. (Leave blank for your own stats.)
 
-/love @person - Indicate you love someone. Does absolutely nothing.
+* /history # - Learn what happened in Season #.
 
-/bug TEXT - Send a bug anonymously to the developers.
+* /leaderboard - See who tops the charts. Add the word "role" as an argument to see win % by role.
+
+* /love @person - Indicate you love someone. Does absolutely nothing.
+
+* /bug TEXT - Send a bug anonymously to the developers.
 
 ### Monsters Only:
 
-/monsters - Privately tells you who the other monster faction players are.
+* /monsters - Privately tells you who the other monster faction players are.
 
-/feast @victim - Privately vote to feast on @victim.
+* /feast @victim - Privately vote to feast on @victim.
 
-### Seer, Lich & Fool:
+#### Seer, Lich & Fool:
 
-/scans - Privately tells you all the scans you have performed.
+* /scans - Privately tells you all the scans you have performed.
 
-### Admin Commands:
+#### Admin Commands:
 
-/startgame - Admin Only. Starts the game if there are enough players.
+* /startgame - Admin Only. Starts the game if there are enough players.
 
-/stopgame - Admin Only. Completely nukes everything and stops the game. Cannot be undone.
+* /stopgame - Admin Only. Completely nukes everything and stops the game. Cannot be undone.
 
-/announce TEXT - Admin Only. Announce something as the Narrator.
+* /announce TEXT - Admin Only. Announce something as the Narrator.
 
-### Can Be Excluded:
+#### Can Be Excluded:
 
-/testdata - Admin Only.Creates fake users to play the game. 
+* /testdata - Admin Only.Creates fake users to play the game. 
 
-/testaction - Admin Only.Causes the fake users to perform a random, but possible action.
+* /testaction - Admin Only.Causes the fake users to perform a random, but possible action.
 
-/admin - Admin Only. I was planning to merge all the test actions under a single Admin commmand, but never finished.
+* /admin - Admin Only. I was planning to merge all the test actions under a single Admin commmand, but never finished.
 
-/skip - Admin Only. Causes the game to evaluate "days" every minute. Continues until the game ends. 
+* /skip - Admin Only. Causes the game to evaluate "days" every minute. Continues until the game ends. 
 
-5. The game uses a variety of Emojis. These can be found in the /public/icons/ folder. I've included a normal, and colour version of them. I recommend using the colour versions. Warlock and Chaos were two characters I never managed to develop, and can be ignored.
+### 5. Configure the emojis. 
+
+These can be found in the /public/icons/ folder. I've included a normal, and colour version of them. I recommend using the colour versions. Warlock and Chaos were two characters I never managed to develop, and can be ignored.
 
 The emojis each represent a game role and need to be mapped as follows:
 * VILLAGER: :villager:
@@ -136,9 +146,11 @@ The emojis each represent a game role and need to be mapped as follows:
 * DRUNK: :towndrunk:
 * BONEWHEEL: :bonewheelskeleton:
 
-6. Permissions. Honestly, I've just given the full permissions to the application when using it, but that's not a great idea, and at some point I will try to post a proper outlook of what permissions are necessary for it to function. 
+### 6. Regarding App Permissions. 
+
+Honestly, I've just given the full permissions to the application when using it, but that's not a great idea, and at some point I will try to post a proper outlook of what permissions are necessary for it to function. 
 
 Informally, the app sends private messages as a Bot User, posts to channels and applies emojis to things. It also uses RTM to read messages in the main game channel at all times. Anything beyond these scopes is probably not needed. For now, experiment as necessary.
 
-7. After these steps, just deploy it to Heroku and you should be able to play the game. Hooray.
+### 7. After these steps, just deploy it to Heroku and you should be able to play the game. Hooray.
 
