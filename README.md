@@ -152,5 +152,5 @@ Honestly, I've just given the full permissions to the application when using it,
 
 Informally, the app sends private messages as a Bot User, posts to channels and applies emojis to things. It also uses RTM to read messages in the main game channel at all times. Anything beyond these scopes is probably not needed. For now, experiment as necessary.
 
-### 7. After these steps, just boot up Herokku and you should be able to play the game. Hooray.
+### 7. After these steps, just boot up Heroku and you should be able to play the game. Hooray.
 
