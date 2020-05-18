@@ -6,7 +6,8 @@ Derivative of Werewolf/Mafia type games.
 
 Built with Node.js/Heroku.
 
-## How to Play - Coming Soon
+## Video Trailer [Click]
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/vzNNUwETjxs/0.jpg)](https://www.youtube.com/watch?v=vzNNUwETjxs)
 
 ## Setup
 
