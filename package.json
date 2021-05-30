@@ -20,7 +20,7 @@
     "request": "^2.81.0",
     "slack-node": "^0.1.8",
     "websocket": "^1.0.26",
-    "ws": "^5.2.0"
+    "ws": "^7.4.6"
   },
   "devDependencies": {},
   "scripts": {
